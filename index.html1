@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistem Informasi Persediaan</title>
+
+  <!-- Google Charts -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+    }
+
+    .sidebar {
+      width: 230px;
+      height: 100vh;
+      background: #1e293b;
+      position: fixed;
+      color: white;
+    }
+
+    .logo {
+      text-align: center;
+      padding: 18px 10px 16px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .logo img {
+      width: 55px;
+      display: block;
+      margin: 0 auto 8px;
+    }
+
+    .logo h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu li {
+      padding: 14px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid #334155;
+    }
+
+    .menu li:hover {
+      background: #334155;
+    }
+
+    .content {
+      margin-left: 230px;
+      padding: 25px;
+    }
+
+    .header {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .statistik {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 20px;
+    }
+
+    .stat-box {
+      background: #1e40af;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .stat-box.masuk { background: #15803d; }
+    .stat-box.keluar { background: #991b1b; }
+
+    /* ===== BUTTON LAPORAN ===== */
+    .btn-group {
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="logo">
+    <img src="PEMDA DONGGALA.png">
+    <h3>SISTEM INFORMASI<br>PERSEDIAAN</h3>
+  </div>
+
+  <ul class="menu">
+    <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
+    <li onclick="showMenu('persediaan')">📦 Persediaan</li>
+    <li onclick="showMenu('barangmasuk')">📥 Barang Masuk</li>
+    <li onclick="showMenu('barangkeluar')">📤 Barang Keluar</li>
+    <li onclick="showMenu('laporan')">📊 Laporan</li>
+    <li onclick="showMenu('pengaturan')">⚙️ Pengaturan</
