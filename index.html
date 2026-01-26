@@ -31,10 +31,10 @@
     }
 
     .logo img {
-      width: 55px;              /* ✔ logo diperkecil */
+      width: 55px;
       height: auto;
       display: block;
-      margin: 0 auto 8px auto;  /* ✔ presisi tengah */
+      margin: 0 auto 8px auto;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,.4));
     }
 
@@ -99,6 +99,41 @@
     table th {
       background: #e2e8f0;
     }
+
+    /* ===== DASHBOARD STATISTIK ===== */
+    .statistik {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .stat-box.masuk {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+    }
+
+    .stat-box.keluar {
+      background: linear-gradient(135deg, #ef4444, #991b1b);
+    }
+
+    .stat-box h4 {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .stat-box h2 {
+      margin: 8px 0 0;
+      font-size: 28px;
+    }
   </style>
 </head>
 
@@ -107,7 +142,6 @@
 <!-- ================= SIDEBAR ================= -->
 <div class="sidebar">
 
-  <!-- LOGO PEMDA -->
   <div class="logo">
     <img src="PEMDA DONGGALA.png" alt="Logo Pemda Donggala">
     <h3>
@@ -136,6 +170,24 @@
   <div id="dashboard" class="card">
     <h3>Selamat Datang</h3>
     <p>Sistem Informasi Persediaan Barang Milik Daerah.</p>
+
+    <!-- KOTAK STATISTIK -->
+    <div class="statistik">
+      <div class="stat-box">
+        <h4>Total Barang</h4>
+        <h2 id="totalBarang">0</h2>
+      </div>
+
+      <div class="stat-box masuk">
+        <h4>Barang Masuk</h4>
+        <h2 id="barangMasuk">0</h2>
+      </div>
+
+      <div class="stat-box keluar">
+        <h4>Barang Keluar</h4>
+        <h2 id="barangKeluar">0</h2>
+      </div>
+    </div>
   </div>
 
   <div id="persediaan" class="card" style="display:none">
@@ -232,6 +284,20 @@
 
     });
   }
+
+  /* ===== STATISTIK DASHBOARD ===== */
+  function loadStatistik() {
+    // Data contoh (bisa diganti dari spreadsheet / database)
+    const total = 150;
+    const masuk = 90;
+    const keluar = 60;
+
+    document.getElementById("totalBarang").innerText = total;
+    document.getElementById("barangMasuk").innerText = masuk;
+    document.getElementById("barangKeluar").innerText = keluar;
+  }
+
+  loadStatistik();
 </script>
 
 </body>
