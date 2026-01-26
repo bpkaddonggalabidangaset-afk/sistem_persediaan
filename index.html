@@ -174,17 +174,17 @@
     <!-- KOTAK STATISTIK -->
     <div class="statistik">
       <div class="stat-box">
-        <h4>Total Barang</h4>
-        <h2 id="totalBarang">0</h2>
+        <h4>SKPD</h4>
+        <h2 id="SKPD">0</h2>
       </div>
 
       <div class="stat-box masuk">
-        <h4>Barang Masuk</h4>
-        <h2 id="barangMasuk">0</h2>
+        <h4>Total Nilai Masuk</h4>
+        <h2 id="totalnilaiMasuk">0</h2>
       </div>
 
       <div class="stat-box keluar">
-        <h4>Barang Keluar</h4>
+        <h4>Total Nilai Keluar</h4>
         <h2 id="barangKeluar">0</h2>
       </div>
     </div>
@@ -195,14 +195,14 @@
     <p>Menampilkan stok barang yang tersedia.</p>
   </div>
 
-  <div id="barangmasuk" class="card" style="display:none">
-    <h3>Barang Masuk</h3>
-    <p>Input barang masuk.</p>
+  <div id="Totalnilaigmasuk" class="card" style="display:none">
+    <h3>Total Nilai Masuk</h3>
+    <p>Input total nilai masuk.</p>
   </div>
 
   <div id="barangkeluar" class="card" style="display:none">
-    <h3>Barang Keluar</h3>
-    <p>Input barang keluar.</p>
+    <h3>Total Nilai Keluar</h3>
+    <p>Input Total Nilai keluar.</p>
   </div>
 
   <div id="laporan" class="card" style="display:none">
@@ -250,7 +250,7 @@
   function loadLaporan() {
 
     const url =
-      "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/gviz/tq?sheet=DOKUMEN";
+      "https://https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/edit?gid=296952332#gid=296952332";
 
     const query = new google.visualization.Query(url);
 
@@ -288,13 +288,13 @@
   /* ===== STATISTIK DASHBOARD ===== */
   function loadStatistik() {
     // Data contoh (bisa diganti dari spreadsheet / database)
-    const total = 150;
+    const total = 87;
     const masuk = 90;
     const keluar = 60;
 
-    document.getElementById("totalBarang").innerText = total;
-    document.getElementById("barangMasuk").innerText = masuk;
-    document.getElementById("barangKeluar").innerText = keluar;
+    document.getElementById("skpd").innerText = total;
+    document.getElementById("totalnilaimasuk").innerText = masuk;
+    document.getElementById("totalnilaikeluar").innerText = keluar;
   }
 
   loadStatistik();
