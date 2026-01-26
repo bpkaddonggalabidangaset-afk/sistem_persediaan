@@ -1,118 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Sistem Informasi Persediaan</title>
+<meta charset="UTF-8">
+<title>Sistem Informasi Persediaan</title>
 
-  <!-- Google Charts -->
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f9;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+}
 
-    .sidebar {
-      width: 230px;
-      height: 100vh;
-      background: #1e293b;
-      position: fixed;
-      color: white;
-    }
+.sidebar {
+  width: 230px;
+  height: 100vh;
+  background: #1e293b;
+  position: fixed;
+  color: white;
+}
 
-    .logo {
-      text-align: center;
-      padding: 18px 10px;
-      border-bottom: 1px solid #334155;
-    }
+.logo {
+  text-align: center;
+  padding: 18px;
+  border-bottom: 1px solid #334155;
+}
 
-    .logo img {
-      width: 55px;
-      margin-bottom: 8px;
-    }
+.logo img {
+  width: 55px;
+}
 
-    .menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .menu li {
-      padding: 14px 20px;
-      cursor: pointer;
-      border-bottom: 1px solid #334155;
-      font-size: 14px;
-    }
+.menu li {
+  padding: 14px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #334155;
+}
 
-    .menu li:hover {
-      background: #334155;
-    }
+.menu li:hover {
+  background: #334155;
+}
 
-    .content {
-      margin-left: 230px;
-      padding: 25px;
-    }
+.content {
+  margin-left: 230px;
+  padding: 25px;
+}
 
-    .header {
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
+.header {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
 
-    .statistik {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
+.statistik {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+}
 
-    .stat-box {
-      background: linear-gradient(135deg, #3b82f6, #1e40af);
-      color: white;
-      padding: 20px;
-      border-radius: 12px;
-    }
+.stat-box {
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
 
-    .stat-box.masuk {
-      background: linear-gradient(135deg, #22c55e, #15803d);
-    }
+.skpd { background:#2563eb; }
+.masuk { background:#22c55e; }
+.keluar { background:#ef4444; }
 
-    .stat-box.keluar {
-      background: linear-gradient(135deg, #ef4444, #991b1b);
-    }
+.btn {
+  padding: 10px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
 
-    /* ===== BUTTON PDF ===== */
-    .btn-group button {
-      padding: 10px 15px;
-      margin-right: 10px;
-      border: none;
-      border-radius: 6px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-    }
-
-    .btn-group button:hover {
-      background: #1e40af;
-    }
-
-    iframe {
-      width: 100%;
-      height: 500px;
-      margin-top: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-  </style>
+iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  margin-top: 15px;
+}
+</style>
 </head>
 
 <body>
@@ -120,7 +106,7 @@
 <div class="sidebar">
   <div class="logo">
     <img src="PEMDA DONGGALA.png">
-    <h3>SISTEM INFORMASI<br>PERSEDIAAN</h3>
+    <h4>SISTEM INFORMASI<br>PERSEDIAAN</h4>
   </div>
 
   <ul class="menu">
@@ -134,59 +120,106 @@
 </div>
 
 <div class="content">
-  <div class="header">
-    <h2 id="judul">Dashboard</h2>
-  </div>
 
-  <div id="dashboard" class="card">
-    <div class="statistik">
-      <div class="stat-box">
-        <h4>SKPD</h4>
-        <h2 id="totalBarang">87</h2>
-      </div>
-      <div class="stat-box masuk">
-        <h4>Barang Masuk</h4>
-        <h2 id="barangMasuk">999</h2>
-      </div>
-      <div class="stat-box keluar">
-        <h4>Barang Keluar</h4>
-        <h2 id="barangKeluar">60</h2>
-      </div>
+<div class="header">
+  <h2 id="judul">Dashboard</h2>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="card">
+  <div class="statistik">
+    <div class="stat-box skpd">
+      <h4>SKPD</h4><h2>87</h2>
+    </div>
+    <div class="stat-box masuk">
+      <h4>Barang Masuk</h4><h2>999</h2>
+    </div>
+    <div class="stat-box keluar">
+      <h4>Barang Keluar</h4><h2>60</h2>
     </div>
   </div>
 
-  <div id="persediaan" class="card" style="display:none">Data Persediaan</div>
-  <div id="barangmasuk" class="card" style="display:none">Barang Masuk</div>
-  <div id="barangkeluar" class="card" style="display:none">Barang Keluar</div>
-
-  <!-- ===== LAPORAN PDF ===== -->
-  <div id="laporan" class="card" style="display:none">
-    <h3>Preview Laporan PDF</h3>
-
-    <div class="btn-group">
-      <button onclick="previewPDF('PROGRES.pdf')">Progres</button>
-      <button onclick="previewPDF('LAPORAN_TAHUNAN.pdf')">Tahunan</button>
-      <button onclick="previewPDF('REKAP_SKPD.pdf')">Rekap SKPD</button>
-    </div>
-
-    <iframe id="pdfFrame"></iframe>
+  <div class="card">
+    <h3>Grafik Persediaan</h3>
+    <div id="chartPersediaan" style="height:400px"></div>
   </div>
+</div>
 
-  <div id="pengaturan" class="card" style="display:none">Pengaturan</div>
+<div id="persediaan" class="card" style="display:none">
+  <h3>Data Persediaan</h3>
+</div>
+
+<div id="barangmasuk" class="card" style="display:none">
+  <h3>Barang Masuk</h3>
+</div>
+
+<div id="barangkeluar" class="card" style="display:none">
+  <h3>Barang Keluar</h3>
+</div>
+
+<!-- LAPORAN (TIDAK DIHILANGKAN) -->
+<div id="laporan" class="card" style="display:none">
+  <h3>Laporan PDF</h3>
+
+  <button class="btn" onclick="previewPDF(1)">Preview Laporan 1</button>
+  <button class="btn" onclick="previewPDF(2)">Preview Laporan 2</button>
+  <button class="btn" onclick="previewPDF(3)">Preview Laporan 3</button>
+
+  <iframe id="pdfViewer"></iframe>
+</div>
+
+<div id="pengaturan" class="card" style="display:none">
+  <h3>Pengaturan</h3>
+</div>
+
 </div>
 
 <script>
-  function showMenu(menu) {
-    const menus = ['dashboard','persediaan','barangmasuk','barangkeluar','laporan','pengaturan'];
-    menus.forEach(m => document.getElementById(m).style.display = 'none');
-    document.getElementById(menu).style.display = 'block';
-    document.getElementById('judul').innerText = menu.toUpperCase();
-  }
+google.charts.load('current', {packages:['corechart']});
 
-  function previewPDF(file) {
-    document.getElementById("pdfFrame").src =
-      "https://drive.google.com/file/d/1oFPHt0Uu2NsD7xSlUrcePmd8OYFlxgqo/view?usp=sharing";
+function showMenu(menu) {
+  const menus = ['dashboard','persediaan','barangmasuk','barangkeluar','laporan','pengaturan'];
+  menus.forEach(m => document.getElementById(m).style.display='none');
+  document.getElementById(menu).style.display='block';
+  document.getElementById('judul').innerText = menu.toUpperCase();
+
+  if(menu === 'dashboard') {
+    setTimeout(drawChart,300);
   }
+}
+
+function drawChart() {
+  const data = google.visualization.arrayToDataTable([
+    ['Kategori','Jumlah'],
+    ['SKPD',87],
+    ['Barang Masuk',999],
+    ['Barang Keluar',60]
+  ]);
+
+  const options = {
+    pieHole:0.4,
+    colors:['#2563eb','#22c55e','#ef4444']
+  };
+
+  const chart = new google.visualization.PieChart(
+    document.getElementById('chartPersediaan')
+  );
+  chart.draw(data,options);
+}
+
+google.charts.setOnLoadCallback(drawChart);
+
+function previewPDF(no) {
+  const viewer = document.getElementById('pdfViewer');
+
+  const files = {
+    1: 'https://drive.google.com/drive/folders/1KFkXSs3lwFOX8Wi4whZi3R7l43x1F_Cj?usp=sharing',
+    2: 'https://drive.google.com/file/d/1oFPHt0Uu2NsD7xSlUrcePmd8OYFlxgqo/view?usp=sharing',
+    3: 'https://drive.google.com/file/d/FILE_ID_3/preview'
+  };
+
+  viewer.src = files[no];
+}
 </script>
 
 </body>
