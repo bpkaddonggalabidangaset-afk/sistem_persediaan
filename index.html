@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Sistem Persediaan</title>
+  <title>Sistem Informasi Persediaan</title>
 
   <!-- Google Charts -->
   <script src="https://www.gstatic.com/charts/loader.js"></script>
@@ -14,12 +14,31 @@
       background: #f4f6f9;
     }
 
+    /* ===== SIDEBAR ===== */
     .sidebar {
       width: 230px;
       height: 100vh;
       background: #1e293b;
       position: fixed;
       color: white;
+    }
+
+    .logo {
+      text-align: center;
+      padding: 20px 10px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .logo img {
+      width: 75px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.4));
+    }
+
+    .logo h3 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .menu {
@@ -38,6 +57,7 @@
       background: #334155;
     }
 
+    /* ===== CONTENT ===== */
     .content {
       margin-left: 230px;
       padding: 25px;
@@ -48,6 +68,7 @@
       padding: 15px 20px;
       border-radius: 8px;
       margin-bottom: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
 
     .card {
@@ -55,6 +76,7 @@
       padding: 20px;
       border-radius: 10px;
       margin-bottom: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
     }
 
     table {
@@ -62,9 +84,11 @@
       border-collapse: collapse;
     }
 
-    table th, table td {
+    table th,
+    table td {
       padding: 10px;
       border: 1px solid #ddd;
+      text-align: left;
     }
 
     table th {
@@ -75,9 +99,19 @@
 
 <body>
 
-<!-- SIDEBAR -->
+<!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
-  <h3 style="text-align:center;padding:15px;">SISTEM INFORMASI<br>PERSEDIAAN</h3>
+
+  <!-- LOGO PEMDA -->
+  <div class="logo">
+    <img
+      src="PEMDA DONGGALA.png"
+    <h3>
+      SISTEM INFORMASI<br>
+      PERSEDIAAN
+    </h3>
+  </div>
+
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
     <li onclick="showMenu('persediaan')">📦 Persediaan</li>
@@ -88,40 +122,51 @@
   </ul>
 </div>
 
-<!-- CONTENT -->
+<!-- ===== CONTENT ===== -->
 <div class="content">
 
   <div class="header">
     <h2 id="judul">Dashboard</h2>
   </div>
 
+  <!-- DASHBOARD -->
   <div id="dashboard" class="card">
-    <p>Selamat datang di Sistem Informasi Persediaan.</p>
+    <h3>Selamat Datang</h3>
+    <p>Sistem Informasi Persediaan Barang Milik Daerah.</p>
   </div>
 
+  <!-- PERSEDIAAN -->
   <div id="persediaan" class="card" style="display:none">
-    <p>Data Persediaan</p>
+    <h3>Data Persediaan</h3>
+    <p>Menampilkan stok barang yang tersedia.</p>
   </div>
 
+  <!-- BARANG MASUK -->
   <div id="barangmasuk" class="card" style="display:none">
-    <p>Barang Masuk</p>
+    <h3>Barang Masuk</h3>
+    <p>Input barang masuk.</p>
   </div>
 
+  <!-- BARANG KELUAR -->
   <div id="barangkeluar" class="card" style="display:none">
-    <p>Barang Keluar</p>
+    <h3>Barang Keluar</h3>
+    <p>Input barang keluar.</p>
   </div>
 
   <!-- LAPORAN -->
   <div id="laporan" class="card" style="display:none">
-    <h3>Data dari Google Spreadsheet</h3>
+    <h3>Laporan dari Google Spreadsheet</h3>
+
     <table id="tabelLaporan">
       <thead></thead>
       <tbody></tbody>
     </table>
   </div>
 
+  <!-- PENGATURAN -->
   <div id="pengaturan" class="card" style="display:none">
-    <p>Pengaturan Sistem</p>
+    <h3>Pengaturan Sistem</h3>
+    <p>Pengaturan user dan sistem.</p>
   </div>
 
 </div>
@@ -130,9 +175,14 @@
   google.charts.load('current', { packages: ['table'] });
 
   function showMenu(menu) {
+
     const menus = [
-      'dashboard','persediaan','barangmasuk',
-      'barangkeluar','laporan','pengaturan'
+      'dashboard',
+      'persediaan',
+      'barangmasuk',
+      'barangkeluar',
+      'laporan',
+      'pengaturan'
     ];
 
     menus.forEach(m => {
@@ -149,13 +199,16 @@
   }
 
   function loadLaporan() {
+
     const url =
-      "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/gviz/tq?sheet=DOKUMEN";
+      "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/edit?gid=296952332#gid=296952332";
 
     const query = new google.visualization.Query(url);
+
     query.send(response => {
+
       if (response.isError()) {
-        alert("Gagal mengambil data Google Sheet");
+        alert("Gagal mengambil data spreadsheet");
         return;
       }
 
@@ -177,7 +230,9 @@
         }
         tbody += "</tr>";
       }
+
       table.querySelector("tbody").innerHTML = tbody;
+
     });
   }
 </script>
