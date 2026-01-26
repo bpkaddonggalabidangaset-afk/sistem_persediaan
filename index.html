@@ -14,21 +14,12 @@
       background: #f4f6f9;
     }
 
-    /* ===== SIDEBAR ===== */
     .sidebar {
       width: 230px;
       height: 100vh;
       background: #1e293b;
       position: fixed;
       color: white;
-    }
-
-    .sidebar h2 {
-      text-align: center;
-      padding: 20px 10px;
-      border-bottom: 1px solid #334155;
-      margin: 0;
-      font-size: 18px;
     }
 
     .menu {
@@ -47,7 +38,6 @@
       background: #334155;
     }
 
-    /* ===== CONTENT ===== */
     .content {
       margin-left: 230px;
       padding: 25px;
@@ -57,7 +47,6 @@
       background: white;
       padding: 15px 20px;
       border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
       margin-bottom: 20px;
     }
 
@@ -65,7 +54,6 @@
       background: white;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.08);
       margin-bottom: 20px;
     }
 
@@ -77,36 +65,19 @@
     table th, table td {
       padding: 10px;
       border: 1px solid #ddd;
-      text-align: left;
     }
 
     table th {
       background: #e2e8f0;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4ed8;
     }
   </style>
 </head>
 
 <body>
 
-<!-- ===== SIDEBAR ===== -->
+<!-- SIDEBAR -->
 <div class="sidebar">
-  <div style="text-align:center;padding:15px;border-bottom:1px solid #334155;">
-    <h2>SISTEM INFORMASI<br>PERSEDIAAN</h2>
-  </div>
-
+  <h3 style="text-align:center;padding:15px;">SISTEM INFORMASI<br>PERSEDIAAN</h3>
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
     <li onclick="showMenu('persediaan')">📦 Persediaan</li>
@@ -117,7 +88,7 @@
   </ul>
 </div>
 
-<!-- ===== CONTENT ===== -->
+<!-- CONTENT -->
 <div class="content">
 
   <div class="header">
@@ -125,29 +96,24 @@
   </div>
 
   <div id="dashboard" class="card">
-    <h3>Selamat Datang</h3>
-    <p>Sistem Informasi Persediaan Barang Milik Daerah.</p>
+    <p>Selamat datang di Sistem Informasi Persediaan.</p>
   </div>
 
   <div id="persediaan" class="card" style="display:none">
-    <h3>Data Persediaan</h3>
-    <button>+ Tambah Barang</button>
+    <p>Data Persediaan</p>
   </div>
 
   <div id="barangmasuk" class="card" style="display:none">
-    <h3>Barang Masuk</h3>
-    <p>Form input barang masuk.</p>
+    <p>Barang Masuk</p>
   </div>
 
   <div id="barangkeluar" class="card" style="display:none">
-    <h3>Barang Keluar</h3>
-    <p>Form input barang keluar.</p>
+    <p>Barang Keluar</p>
   </div>
 
-  <!-- ===== LAPORAN ===== -->
+  <!-- LAPORAN -->
   <div id="laporan" class="card" style="display:none">
-    <h3>Laporan (Google Spreadsheet)</h3>
-
+    <h3>Data dari Google Spreadsheet</h3>
     <table id="tabelLaporan">
       <thead></thead>
       <tbody></tbody>
@@ -155,22 +121,18 @@
   </div>
 
   <div id="pengaturan" class="card" style="display:none">
-    <h3>Pengaturan</h3>
-    <p>Manajemen user dan sistem.</p>
+    <p>Pengaturan Sistem</p>
   </div>
 
 </div>
 
-<!-- ===== SCRIPT ===== -->
 <script>
+  google.charts.load('current', { packages: ['table'] });
+
   function showMenu(menu) {
     const menus = [
-      'dashboard',
-      'persediaan',
-      'barangmasuk',
-      'barangkeluar',
-      'laporan',
-      'pengaturan'
+      'dashboard','persediaan','barangmasuk',
+      'barangkeluar','laporan','pengaturan'
     ];
 
     menus.forEach(m => {
@@ -178,50 +140,44 @@
     });
 
     document.getElementById(menu).style.display = 'block';
-
-    if (menu === 'laporan') {
-      loadLaporan();
-    }
-
     document.getElementById('judul').innerText =
       menu.charAt(0).toUpperCase() + menu.slice(1);
+
+    if (menu === 'laporan') {
+      google.charts.setOnLoadCallback(loadLaporan);
+    }
   }
 
-  // ===== GOOGLE SHEET LOAD =====
-  google.charts.load('current', { packages: ['table'] });
-
   function loadLaporan() {
-    const query = new google.visualization.Query(
-      'https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/gviz/tq?sheet=DOKUMEN'
-    );
+    const url =
+      "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/gviz/tq?sheet=DOKUMEN";
 
-    query.send(function (response) {
+    const query = new google.visualization.Query(url);
+    query.send(response => {
       if (response.isError()) {
-        alert('Gagal mengambil data');
+        alert("Gagal mengambil data Google Sheet");
         return;
       }
 
       const data = response.getDataTable();
-      const table = document.getElementById('tabelLaporan');
+      const table = document.getElementById("tabelLaporan");
 
-      // Header
-      let thead = '<tr>';
+      let thead = "<tr>";
       for (let i = 0; i < data.getNumberOfColumns(); i++) {
         thead += `<th>${data.getColumnLabel(i)}</th>`;
       }
-      thead += '</tr>';
-      table.querySelector('thead').innerHTML = thead;
+      thead += "</tr>";
+      table.querySelector("thead").innerHTML = thead;
 
-      // Body
-      let tbody = '';
+      let tbody = "";
       for (let r = 0; r < data.getNumberOfRows(); r++) {
-        tbody += '<tr>';
+        tbody += "<tr>";
         for (let c = 0; c < data.getNumberOfColumns(); c++) {
           tbody += `<td>${data.getValue(r, c)}</td>`;
         }
-        tbody += '</tr>';
+        tbody += "</tr>";
       }
-      table.querySelector('tbody').innerHTML = tbody;
+      table.querySelector("tbody").innerHTML = tbody;
     });
   }
 </script>
