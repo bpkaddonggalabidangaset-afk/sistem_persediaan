@@ -98,7 +98,7 @@ iframe {
 
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
-    <li onclick="showMenu('persediaan 2026')">📦 Persediaan</li>
+    <li onclick="showMenu('persediaan 2025')">📦 Persediaan</li>
     <li onclick="showMenu('Persediaan Diserahkan')">📥 Perediaan diserahkan</li>
     <li onclick="showMenu('Reklasifikasi')">📤 Reklas Persediaan</li>
     <li onclick="showMenu('laporan')">📊 Laporan</li>
@@ -136,10 +136,11 @@ iframe {
 <div id="persediaan 2026" class="card" style="display:none">
   <h3>Data Persediaan</h3>
 
-  <!-- TOMBOL GOOGLE DRIVE (DITAMBAHKAN) -->
+  <!-- TOMBOL1 GOOGLE DRIVE (DITAMBAHKAN) -->
   <button class="btn" onclick="openDrivePersediaan()">
     📂 Google Drive Persediaan
   </button>
+  <!-- TOMBOL2 GOOGLE DRIVE (DITAMBAHKAN) -->
     <button class="btn" onclick="openDrivePersediaan()">
     📂 KIKING
   </button>
@@ -227,7 +228,12 @@ function previewPDF(no) {
   viewer.src = files[no];
 }
 
-/* FUNGSI BARU – KHUSUS PERSEDIAAN */
+/* FUNGSI BARU1 – KHUSUS PERSEDIAAN */
+function openDrivePersediaan() {
+  window.open(
+    'https://drive.google.com/drive/folders/1919oiuozP6EVvxqMBnRl33NkuAjMlTF1?usp=sharing'
+  );
+  /* FUNGSI BARU2 – KHUSUS PERSEDIAAN */
 function openDrivePersediaan() {
   window.open(
     'https://drive.google.com/drive/folders/1919oiuozP6EVvxqMBnRl33NkuAjMlTF1?usp=sharing'
