@@ -12,7 +12,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f4f6f9;
 }
-
 .sidebar {
   width: 230px;
   height: 100vh;
@@ -20,68 +19,56 @@ body {
   position: fixed;
   color: white;
 }
-
 .logo {
   text-align: center;
   padding: 18px;
   border-bottom: 1px solid #334155;
 }
-
 .logo img {
   width: 55px;
 }
-
 .menu {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .menu li {
   padding: 14px 20px;
   cursor: pointer;
   border-bottom: 1px solid #334155;
 }
-
 .menu li:hover {
   background: #334155;
 }
-
 .content {
   margin-left: 230px;
   padding: 25px;
 }
-
 .header {
   background: white;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
-
 .card {
   background: white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
 .statistik {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 20px;
 }
-
 .stat-box {
   color: white;
   padding: 20px;
   border-radius: 12px;
 }
-
 .skpd { background:#2563eb; }
 .masuk { background:#22c55e; }
 .keluar { background:#ef4444; }
-
 .btn {
   padding: 10px 15px;
   margin-right: 10px;
@@ -91,7 +78,6 @@ body {
   background: #2563eb;
   color: white;
 }
-
 iframe {
   width: 100%;
   height: 500px;
@@ -149,15 +135,15 @@ iframe {
   <h3>Data Persediaan</h3>
 </div>
 
-<div id="Perediaandiserahkan" class="card" style="display:none">
+<div id="barangmasuk" class="card" style="display:none">
   <h3>Perediaan</h3>
 </div>
 
-<div id="Reklasifikasi" class="card" style="display:none">
+<div id="barangkeluar" class="card" style="display:none">
   <h3>Reklas</h3>
 </div>
 
-<!-- LAPORAN (TIDAK DIHILANGKAN) -->
+<!-- LAPORAN -->
 <div id="laporan" class="card" style="display:none">
   <h3>Laporan PDF</h3>
 
@@ -178,9 +164,21 @@ iframe {
 google.charts.load('current', {packages:['corechart']});
 
 function showMenu(menu) {
-  const menus = ['dashboard','persediaan','barangmasuk','barangkeluar','laporan','pengaturan'];
-  menus.forEach(m => document.getElementById(m).style.display='none');
-  document.getElementById(menu).style.display='block';
+  const menus = [
+    'dashboard',
+    'persediaan',
+    'barangmasuk',
+    'barangkeluar',
+    'laporan',
+    'pengaturan'
+  ];
+
+  menus.forEach(m => {
+    const el = document.getElementById(m);
+    if (el) el.style.display = 'none';
+  });
+
+  document.getElementById(menu).style.display = 'block';
   document.getElementById('judul').innerText = menu.toUpperCase();
 
   if(menu === 'dashboard') {
@@ -211,13 +209,11 @@ google.charts.setOnLoadCallback(drawChart);
 
 function previewPDF(no) {
   const viewer = document.getElementById('pdfViewer');
-
   const files = {
     1: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnNY-Zn0D7YEDWEwXmCGgWsyGl6zFSZ9NNPGvguGB9Ea6WRtzUoKLQHyzBQkhoxpsLlwiyFQ8mNXjv/pubhtml?gid=1701220395&single=true',
     2: 'https://drive.google.com/file/d/1oFPHt0Uu2NsD7xSlUrcePmd8OYFlxgqo/view?usp=sharing',
     3: 'https://drive.google.com/file/d/FILE_ID_3/preview'
   };
-
   viewer.src = files[no];
 }
 </script>
