@@ -72,6 +72,7 @@ body {
 .btn {
   padding: 10px 15px;
   margin-right: 10px;
+  margin-bottom: 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -98,7 +99,7 @@ iframe {
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
     <li onclick="showMenu('persediaan')">📦 Persediaan</li>
-    <li onclick="showMenu('Persediaan Diserahkan')">📥 Perediaan diserahkan</li>
+    <li onclick="showMenu('PersediaanDiserahkan')">📥 Perediaan diserahkan</li>
     <li onclick="showMenu('Reklasifikasi')">📤 Reklas Persediaan</li>
     <li onclick="showMenu('laporan')">📊 Laporan</li>
     <li onclick="showMenu('pengaturan')">⚙️ Pengaturan</li>
@@ -131,18 +132,21 @@ iframe {
   </div>
 </div>
 
+<!-- PERSEDIAAN -->
 <div id="persediaan" class="card" style="display:none">
   <h3>Data Persediaan</h3>
+
+  <!-- TOMBOL GOOGLE DRIVE (DITAMBAHKAN) -->
+  <button class="btn" onclick="openDrivePersediaan()">
+    📂 Google Drive Persediaan
+  </button>
+    <button class="btn" onclick="openDrivePersediaan()">
+    📂 KIKING
+  </button>
 </div>
 
 <div id="PersediaanDiserahkan" class="card" style="display:none">
   <h3>Persediaan Diserahkan</h3>
-
-  <button class="btn" onclick="previewPDF(1)">Preview Laporan 1</button>
-  <button class="btn" onclick="previewPDF(2)">Preview Laporan 2</button>
-  <button class="btn" onclick="previewPDF(3)">Preview Laporan 3</button>
-
-  <iframe id="pdfViewer"></iframe>
 </div>
 
 <div id="Reklasifikasi" class="card" style="display:none">
@@ -221,6 +225,13 @@ function previewPDF(no) {
     3: 'https://drive.google.com/file/d/FILE_ID_3/preview'
   };
   viewer.src = files[no];
+}
+
+/* FUNGSI BARU – KHUSUS PERSEDIAAN */
+function openDrivePersediaan() {
+  window.open(
+    'https://drive.google.com/drive/folders/1KFkXSs3lwFOX8Wi4whZi3R7l43x1F_Cj?usp=sharing'
+  );
 }
 </script>
 
