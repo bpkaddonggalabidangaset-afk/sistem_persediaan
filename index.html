@@ -110,10 +110,10 @@ body {
       <h4>SKPD</h4><h2>85</h2>
     </div>
     <div class="stat-box masuk">
-      <h4>Saldo Awal</h4><h2>119.127.966.592,98</h2>
+      <h4>Saldo Awal</h4><h2>Rp.119.127.966.592,98</h2>
     </div>
     <div class="stat-box keluar">
-      <h4>Saldo Akhir</h4><h2>117.370.939.214,99</h2>
+      <h4>Saldo Akhir</h4><h2>Rp.117.370.939.214,99</h2>
     </div>
   </div>
 
@@ -159,21 +159,32 @@ function showMenu(menu) {
 }
 
 function drawChart() {
+
   const data = google.visualization.arrayToDataTable([
     ['Kategori','Jumlah'],
     ['SKPD',85],
-    ['Saldo Awal',119.127.966.592,98],
-    ['Saldo Akhir',117.370.939.214,99]
+    ['Saldo Awal',119127966592.98],
+    ['Saldo Akhir',117370939214.99]
   ]);
+
+  // FORMAT RUPIAH
+  const formatter = new google.visualization.NumberFormat({
+    prefix: 'Rp. ',
+    groupingSymbol: '.',
+    decimalSymbol: ','
+  });
+  formatter.format(data, 1);
 
   const options = {
     pieHole:0.4,
-    colors:['#2563eb','#22c55e','#ef4444']
+    colors:['#2563eb','#22c55e','#ef4444'],
+    legend: { position: 'right' }
   };
 
   const chart = new google.visualization.PieChart(
     document.getElementById('chartPersediaan')
   );
+
   chart.draw(data,options);
 }
 
