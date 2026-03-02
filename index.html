@@ -40,6 +40,24 @@ body {
 .menu li:hover {
   background: #334155;
 }
+
+/* SUBMENU */
+.submenu {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: none;
+  background: #0f172a;
+}
+.submenu li {
+  padding: 10px 30px;
+  font-size: 14px;
+  border-bottom: 1px solid #1e293b;
+}
+.submenu li:hover {
+  background: #334155;
+}
+
 .content {
   margin-left: 230px;
   padding: 25px;
@@ -92,7 +110,13 @@ body {
 
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
-    <li onclick="showMenu('persediaan')">📦 Persediaan</li>
+
+    <li onclick="toggleSubmenu()">📦 Persediaan ▾</li>
+    <ul id="submenuPersediaan" class="submenu">
+      <li onclick="showMenu('laporan')">📄 Laporan</li>
+      <li onclick="showMenu('rincian')">📑 Rincian</li>
+    </ul>
+
     <li onclick="showMenu('pengaturan')">⚙️ Pengaturan</li>
   </ul>
 </div>
@@ -123,13 +147,16 @@ body {
   </div>
 </div>
 
-<!-- PERSEDIAAN -->
-<div id="persediaan" class="card" style="display:none">
-  <h3>Data Persediaan</h3>
+<!-- LAPORAN -->
+<div id="laporan" class="card" style="display:none">
+  <h3>Menu Laporan</h3>
+  <p>Isi laporan persediaan di sini.</p>
+</div>
 
-  <button class="btn" onclick="openDrivePersediaan()">
-    📂 Google Drive Persediaan
-  </button>
+<!-- RINCIAN -->
+<div id="rincian" class="card" style="display:none">
+  <h3>Menu Rincian</h3>
+  <p>Isi rincian persediaan di sini.</p>
 </div>
 
 <!-- PENGATURAN -->
@@ -143,7 +170,7 @@ body {
 google.charts.load('current', {packages:['corechart']});
 
 function showMenu(menu) {
-  const menus = ['dashboard','persediaan','pengaturan'];
+  const menus = ['dashboard','laporan','rincian','pengaturan'];
 
   menus.forEach(m => {
     const el = document.getElementById(m);
@@ -158,6 +185,11 @@ function showMenu(menu) {
   }
 }
 
+function toggleSubmenu() {
+  const submenu = document.getElementById('submenuPersediaan');
+  submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+}
+
 function drawChart() {
 
   const data = google.visualization.arrayToDataTable([
@@ -167,7 +199,6 @@ function drawChart() {
     ['Saldo Akhir',117370939214.99]
   ]);
 
-  // FORMAT RUPIAH
   const formatter = new google.visualization.NumberFormat({
     prefix: 'Rp. ',
     groupingSymbol: '.',
@@ -189,12 +220,6 @@ function drawChart() {
 }
 
 google.charts.setOnLoadCallback(drawChart);
-
-function openDrivePersediaan() {
-  window.open(
-    'https://drive.google.com/drive/folders/1KFkXSs3lwFOX8Wi4whZi3R7l43x1F_Cj?usp=sharing'
-  );
-}
 </script>
 
 </body>
