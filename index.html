@@ -25,6 +25,7 @@ body {
   border-bottom: 1px solid #334155;
 }
 .logo img { width: 55px; }
+
 .menu { list-style: none; padding: 0; margin: 0; }
 .menu li {
   padding: 14px 20px;
@@ -48,27 +49,37 @@ body {
 .submenu li:hover { background: #334155; }
 
 .content { margin-left: 230px; padding: 25px; }
+
 .header {
   background: white;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
+
 .card {
   background: white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .statistik {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 20px;
 }
-.stat-box { color: white; padding: 20px; border-radius: 12px; }
+
+.stat-box {
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
 .skpd { background:#2563eb; }
 .masuk { background:#22c55e; }
 .keluar { background:#ef4444; }
+
 .btn {
   padding: 10px 15px;
   margin-right: 10px;
@@ -79,6 +90,7 @@ body {
   background: #2563eb;
   color: white;
 }
+
 iframe {
   width: 100%;
   height: 500px;
@@ -119,6 +131,7 @@ iframe {
   <h2 id="judul">Dashboard</h2>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dashboard" class="card">
   <div class="statistik">
     <div class="stat-box skpd">
@@ -138,6 +151,7 @@ iframe {
   </div>
 </div>
 
+<!-- LAPORAN -->
 <div id="laporan" class="card" style="display:none">
   <h3>Menu Laporan</h3>
 
@@ -147,14 +161,17 @@ iframe {
   <iframe id="pdfViewer"></iframe>
 </div>
 
+<!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
 </div>
 
+<!-- ADMIN -->
 <div id="admin" class="card" style="display:none">
   <h3>Menu Admin</h3>
 </div>
 
+<!-- KELUAR -->
 <div id="keluar" class="card" style="display:none">
   <h3>Logout Berhasil</h3>
 </div>
@@ -164,14 +181,15 @@ iframe {
 <script>
 google.charts.load('current', {packages:['corechart']});
 
-/* =========================
-   GANTI DENGAN LINK PUBLISH GOOGLE SHEETS ANDA
-========================= */
+/* =====================
+   LINK GOOGLE SHEETS
+===================== */
 
 const PDF_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
+
 const EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
 
-/* ========================= */
+/* ===================== */
 
 function showMenu(menu) {
   const menus = ['dashboard','laporan','rincian','admin','keluar'];
@@ -224,14 +242,19 @@ function drawChart() {
 
 google.charts.setOnLoadCallback(drawChart);
 
-/* PREVIEW PDF */
+/* PDF → PREVIEW SAJA */
 function previewPDF() {
   document.getElementById('pdfViewer').src = PDF_URL;
 }
 
-/* DOWNLOAD EXCEL */
+/* EXCEL → LANGSUNG DOWNLOAD */
 function downloadExcel() {
-  window.open(EXCEL_URL, '_blank');
+  const link = document.createElement("a");
+  link.href = EXCEL_URL;
+  link.download = "Laporan_Persediaan.xlsx";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 </script>
 
