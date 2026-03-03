@@ -24,24 +24,15 @@ body {
   padding: 18px;
   border-bottom: 1px solid #334155;
 }
-.logo img {
-  width: 55px;
-}
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+.logo img { width: 55px; }
+.menu { list-style: none; padding: 0; margin: 0; }
 .menu li {
   padding: 14px 20px;
   cursor: pointer;
   border-bottom: 1px solid #334155;
 }
-.menu li:hover {
-  background: #334155;
-}
+.menu li:hover { background: #334155; }
 
-/* SUBMENU */
 .submenu {
   list-style: none;
   padding: 0;
@@ -54,14 +45,9 @@ body {
   font-size: 14px;
   border-bottom: 1px solid #1e293b;
 }
-.submenu li:hover {
-  background: #334155;
-}
+.submenu li:hover { background: #334155; }
 
-.content {
-  margin-left: 230px;
-  padding: 25px;
-}
+.content { margin-left: 230px; padding: 25px; }
 .header {
   background: white;
   padding: 15px;
@@ -79,11 +65,7 @@ body {
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 20px;
 }
-.stat-box {
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-}
+.stat-box { color: white; padding: 20px; border-radius: 12px; }
 .skpd { background:#2563eb; }
 .masuk { background:#22c55e; }
 .keluar { background:#ef4444; }
@@ -117,15 +99,13 @@ iframe {
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
 
-    <!-- PERSediaan -->
-    <li onclick="toggleSubmenu('submenuPersediaan')">📦 Persediaan </li>
+    <li onclick="toggleSubmenu('submenuPersediaan')">📦 Persediaan</li>
     <ul id="submenuPersediaan" class="submenu">
       <li onclick="showMenu('laporan')">📄 Laporan</li>
       <li onclick="showMenu('rincian')">📑 Rincian</li>
     </ul>
 
-    <!-- PENGATURAN -->
-    <li onclick="toggleSubmenu('submenuPengaturan')">⚙️ Pengaturan </li>
+    <li onclick="toggleSubmenu('submenuPengaturan')">⚙️ Pengaturan</li>
     <ul id="submenuPengaturan" class="submenu">
       <li onclick="showMenu('admin')">👤 Admin</li>
       <li onclick="showMenu('keluar')">🚪 Keluar</li>
@@ -139,7 +119,6 @@ iframe {
   <h2 id="judul">Dashboard</h2>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboard" class="card">
   <div class="statistik">
     <div class="stat-box skpd">
@@ -159,25 +138,23 @@ iframe {
   </div>
 </div>
 
-<!-- LAPORAN -->
 <div id="laporan" class="card" style="display:none">
   <h3>Menu Laporan</h3>
+
   <button class="btn" onclick="previewPDF()">📄 Preview PDF</button>
   <button class="btn" onclick="downloadExcel()">📥 Download Excel</button>
+
   <iframe id="pdfViewer"></iframe>
 </div>
 
-<!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
 </div>
 
-<!-- ADMIN -->
 <div id="admin" class="card" style="display:none">
   <h3>Menu Admin</h3>
 </div>
 
-<!-- KELUAR -->
 <div id="keluar" class="card" style="display:none">
   <h3>Logout Berhasil</h3>
 </div>
@@ -186,6 +163,15 @@ iframe {
 
 <script>
 google.charts.load('current', {packages:['corechart']});
+
+/* =========================
+   GANTI FILE ID DI SINI
+========================= */
+
+const FILE_ID_PDF = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
+const FILE_ID_EXCEL = "MASUKKAN_FILE_ID_EXCEL_DI_SINI";
+
+/* ========================= */
 
 function showMenu(menu) {
   const menus = ['dashboard','laporan','rincian','admin','keluar'];
@@ -238,13 +224,16 @@ function drawChart() {
 
 google.charts.setOnLoadCallback(drawChart);
 
+/* PREVIEW PDF DARI GOOGLE DRIVE */
 function previewPDF() {
-  document.getElementById('pdfViewer').src =
-    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+  const url = `https://drive.google.com/file/d/${FILE_ID_PDF}/preview`;
+  document.getElementById('pdfViewer').src = url;
 }
 
+/* DOWNLOAD EXCEL DARI GOOGLE DRIVE */
 function downloadExcel() {
-  window.open("https://file-examples.com/wp-content/uploads/2017/02/file_example_XLSX_10.xlsx");
+  const url = `https://drive.google.com/uc?export=download&id=${FILE_ID_EXCEL}`;
+  window.open(url, '_blank');
 }
 </script>
 
