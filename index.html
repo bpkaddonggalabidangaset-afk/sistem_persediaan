@@ -79,6 +79,8 @@ body {
 .skpd { background:#2563eb; }
 .masuk { background:#22c55e; }
 .keluar { background:#ef4444; }
+.realisasi { background:#f59e0b; }
+.pengeluaran { background:#8b5cf6; }
 
 .btn {
   padding: 10px 15px;
@@ -143,6 +145,15 @@ iframe {
     <div class="stat-box keluar">
       <h4>Saldo Akhir</h4><h2>Rp.117.370.939.214,99</h2>
     </div>
+
+    <!-- TAMBAHAN -->
+    <div class="stat-box realisasi">
+      <h4>Realisasi</h4><h2>Rp.15.000.000.000</h2>
+    </div>
+    <div class="stat-box pengeluaran">
+      <h4>Pengeluaran</h4><h2>Rp.12.500.000.000</h2>
+    </div>
+
   </div>
 
   <div class="card">
@@ -151,7 +162,7 @@ iframe {
   </div>
 </div>
 
-<!-- LAPORAN -->
+<!-- BAGIAN LAIN TETAP SAMA -->
 <div id="laporan" class="card" style="display:none">
   <h3>Menu Laporan</h3>
   <button class="btn" onclick="previewPDF()">📄 Preview PDF</button>
@@ -159,7 +170,6 @@ iframe {
   <iframe id="pdfViewer"></iframe>
 </div>
 
-<!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
   <button class="btn" onclick="openDokumen()">📂 Dokumen Pendukung</button>
@@ -179,12 +189,11 @@ iframe {
 <script>
 google.charts.load('current', {packages:['corechart']});
 
-/* LINK GOOGLE SHEETS */
-const PDF_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?gid=44116260&single=true&preview=pdf";
-const EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
-
-const DOKUMEN_DRIVE_URL = "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/edit?usp=sharing";
-const KK_EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8Ofz9SCoesDN-CUQrUf1LTWx7mJRzh1QJxy3Pw1MHq33iduZ45iotwxdMbXc-OA/pub?output=xlsx";
+/* DATA NILAI */
+const saldoAwal = 119127966592.98;
+const saldoAkhir = 117370939214.99;
+const realisasi = 15000000000;
+const pengeluaran = 12500000000;
 
 function showMenu(menu) {
   const menus = ['dashboard','laporan','rincian','admin','keluar'];
@@ -205,34 +214,39 @@ function toggleSubmenu(id) {
 function drawChart() {
   const data = google.visualization.arrayToDataTable([
     ['Kategori','Jumlah'],
-    ['SKPD',85],
-    ['Saldo Awal',119127966592.98],
-    ['Saldo Akhir',117370939214.99]
+    ['Saldo Awal', saldoAwal],
+    ['Saldo Akhir', saldoAkhir],
+    ['Realisasi', realisasi],
+    ['Pengeluaran', pengeluaran]
   ]);
 
   const chart = new google.visualization.PieChart(
     document.getElementById('chartPersediaan')
   );
 
-  chart.draw(data,{pieHole:0.4});
+  chart.draw(data,{
+    pieHole:0.4,
+    colors:['#22c55e','#ef4444','#f59e0b','#8b5cf6']
+  });
 }
 
 google.charts.setOnLoadCallback(drawChart);
 
 function previewPDF() {
-  document.getElementById('pdfViewer').src = PDF_URL;
+  document.getElementById('pdfViewer').src =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
 }
 
 function downloadExcel() {
-  window.open(EXCEL_URL, '_blank');
+  window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx", '_blank');
 }
 
 function openDokumen() {
-  window.open(DOKUMEN_DRIVE_URL, '_blank');
+  window.open("https://docs.google.com", '_blank');
 }
 
 function downloadKK() {
-  window.open(KK_EXCEL_URL, '_blank');
+  window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8Ofz9SCoesDN-CUQrUf1LTWx7mJRzh1QJxy3Pw1MHq33iduZ45iotwxdMbXc-OA/pub?output=xlsx", '_blank');
 }
 </script>
 
