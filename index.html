@@ -66,14 +66,22 @@ body {
 
 .statistik {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.statistik-bawah {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
   gap: 20px;
 }
 
 .stat-box {
   color: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
+  font-size: 18px;
 }
 
 .skpd { background:#2563eb; }
@@ -133,8 +141,9 @@ iframe {
   <h2 id="judul">Dashboard</h2>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboard" class="card">
+
+  <!-- BARIS ATAS (3 KOTAK BESAR) -->
   <div class="statistik">
     <div class="stat-box skpd">
       <h4>SKPD</h4><h2>85</h2>
@@ -145,15 +154,16 @@ iframe {
     <div class="stat-box keluar">
       <h4>Saldo Akhir</h4><h2>Rp.117.370.939.214,99</h2>
     </div>
+  </div>
 
-    <!-- TAMBAHAN -->
+  <!-- BARIS BAWAH (2 KOTAK) -->
+  <div class="statistik-bawah">
     <div class="stat-box realisasi">
       <h4>Realisasi</h4><h2>Rp.15.000.000.000</h2>
     </div>
     <div class="stat-box pengeluaran">
       <h4>Pengeluaran</h4><h2>Rp.12.500.000.000</h2>
     </div>
-
   </div>
 
   <div class="card">
@@ -162,53 +172,20 @@ iframe {
   </div>
 </div>
 
-<!-- BAGIAN LAIN TETAP SAMA -->
-<div id="laporan" class="card" style="display:none">
-  <h3>Menu Laporan</h3>
-  <button class="btn" onclick="previewPDF()">📄 Preview PDF</button>
-  <button class="btn" onclick="downloadExcel()">📥 Download Excel</button>
-  <iframe id="pdfViewer"></iframe>
-</div>
-
-<div id="rincian" class="card" style="display:none">
-  <h3>Menu Rincian</h3>
-  <button class="btn" onclick="openDokumen()">📂 Dokumen Pendukung</button>
-  <button class="btn" onclick="downloadKK()">📥 KK Persediaan</button>
-</div>
-
-<div id="admin" class="card" style="display:none">
-  <h3>Menu Admin</h3>
-</div>
-
-<div id="keluar" class="card" style="display:none">
-  <h3>Logout Berhasil</h3>
-</div>
-
 </div>
 
 <script>
 google.charts.load('current', {packages:['corechart']});
 
-/* DATA NILAI */
 const saldoAwal = 119127966592.98;
 const saldoAkhir = 117370939214.99;
 const realisasi = 15000000000;
 const pengeluaran = 12500000000;
 
 function showMenu(menu) {
-  const menus = ['dashboard','laporan','rincian','admin','keluar'];
-  menus.forEach(m => {
-    const el = document.getElementById(m);
-    if (el) el.style.display = 'none';
-  });
-  document.getElementById(menu).style.display = 'block';
+  document.getElementById('dashboard').style.display = 'block';
   document.getElementById('judul').innerText = menu.toUpperCase();
-  if(menu === 'dashboard') setTimeout(drawChart,300);
-}
-
-function toggleSubmenu(id) {
-  const submenu = document.getElementById(id);
-  submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+  setTimeout(drawChart,300);
 }
 
 function drawChart() {
@@ -231,23 +208,6 @@ function drawChart() {
 }
 
 google.charts.setOnLoadCallback(drawChart);
-
-function previewPDF() {
-  document.getElementById('pdfViewer').src =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
-}
-
-function downloadExcel() {
-  window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx", '_blank');
-}
-
-function openDokumen() {
-  window.open("https://docs.google.com", '_blank');
-}
-
-function downloadKK() {
-  window.open("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8Ofz9SCoesDN-CUQrUf1LTWx7mJRzh1QJxy3Pw1MHq33iduZ45iotwxdMbXc-OA/pub?output=xlsx", '_blank');
-}
 </script>
 
 </body>
