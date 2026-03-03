@@ -105,7 +105,7 @@ iframe {
 <div class="sidebar">
   <div class="logo">
     <img src="PEMDA DONGGALA.png">
-    <h4>SISTEM INFORMASI<br>PERSEDIAAN<br>BPKAD Bidang Aset</h4>
+    <h4>SISTEM INFORMASI<br>PERSEDIAAN<br>BPKAD BID.ASET</h4>
   </div>
 
   <ul class="menu">
@@ -162,17 +162,14 @@ iframe {
 <!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
-
   <button class="btn" onclick="openDokumen()">📂 Dokumen Pendukung</button>
   <button class="btn" onclick="downloadKK()">📥 KK Persediaan</button>
 </div>
 
-<!-- ADMIN -->
 <div id="admin" class="card" style="display:none">
   <h3>Menu Admin</h3>
 </div>
 
-<!-- KELUAR -->
 <div id="keluar" class="card" style="display:none">
   <h3>Logout Berhasil</h3>
 </div>
@@ -182,18 +179,12 @@ iframe {
 <script>
 google.charts.load('current', {packages:['corechart']});
 
-/* =====================
-   LINK GOOGLE SHEETS
-===================== */
-
+/* LINK GOOGLE SHEETS */
 const PDF_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
 const EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
 
-/* GANTI SESUAI KEBUTUHAN */
 const DOKUMEN_DRIVE_URL = "https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/edit?usp=sharing";
 const KK_EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8Ofz9SCoesDN-CUQrUf1LTWx7mJRzh1QJxy3Pw1MHq33iduZ45iotwxdMbXc-OA/pub?output=xlsx";
-
-/* ===================== */
 
 function showMenu(menu) {
   const menus = ['dashboard','laporan','rincian','admin','keluar'];
@@ -219,44 +210,27 @@ function drawChart() {
     ['Saldo Akhir',117370939214.99]
   ]);
 
-  const formatter = new google.visualization.NumberFormat({
-    prefix: 'Rp. ',
-    groupingSymbol: '.',
-    decimalSymbol: ','
-  });
-  formatter.format(data, 1);
-
-  const options = {
-    pieHole:0.4,
-    colors:['#2563eb','#22c55e','#ef4444'],
-    legend: { position: 'right' }
-  };
-
   const chart = new google.visualization.PieChart(
     document.getElementById('chartPersediaan')
   );
 
-  chart.draw(data,options);
+  chart.draw(data,{pieHole:0.4});
 }
 
 google.charts.setOnLoadCallback(drawChart);
 
-/* PDF PREVIEW */
 function previewPDF() {
   document.getElementById('pdfViewer').src = PDF_URL;
 }
 
-/* DOWNLOAD LAPORAN EXCEL */
 function downloadExcel() {
   window.open(EXCEL_URL, '_blank');
 }
 
-/* BUKA GOOGLE DRIVE */
 function openDokumen() {
   window.open(DOKUMEN_DRIVE_URL, '_blank');
 }
 
-/* DOWNLOAD KK PERSEDIAAN */
 function downloadKK() {
   window.open(KK_EXCEL_URL, '_blank');
 }
