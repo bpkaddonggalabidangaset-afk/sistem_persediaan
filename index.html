@@ -44,7 +44,7 @@ body {
 /* SUBMENU */
 .submenu {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
   display: none;
   background: #0f172a;
@@ -117,16 +117,19 @@ iframe {
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
 
-    <li onclick="toggleSubmenu()">📦 Persediaan </li>
+    <!-- PERSediaan -->
+    <li onclick="toggleSubmenu('submenuPersediaan')">📦 Persediaan ▾</li>
     <ul id="submenuPersediaan" class="submenu">
       <li onclick="showMenu('laporan')">📄 Laporan</li>
       <li onclick="showMenu('rincian')">📑 Rincian</li>
     </ul>
 
-     <li onclick="toggleSubmenu()">⚙️ Pengaturan </li>
+    <!-- PENGATURAN -->
+    <li onclick="toggleSubmenu('submenuPengaturan')">⚙️ Pengaturan ▾</li>
     <ul id="submenuPengaturan" class="submenu">
-      <li onclick="showMenu('Admin')">📄 Admin</li>
-      <li onclick="showMenu('Keluar')">📑 Keluar</li>
+      <li onclick="showMenu('admin')">👤 Admin</li>
+      <li onclick="showMenu('keluar')">🚪 Keluar</li>
+    </ul>
   </ul>
 </div>
 
@@ -159,22 +162,24 @@ iframe {
 <!-- LAPORAN -->
 <div id="laporan" class="card" style="display:none">
   <h3>Menu Laporan</h3>
-
   <button class="btn" onclick="previewPDF()">📄 Preview PDF</button>
   <button class="btn" onclick="downloadExcel()">📥 Download Excel</button>
-
   <iframe id="pdfViewer"></iframe>
 </div>
 
 <!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
-  <p>Isi rincian persediaan di sini.</p>
 </div>
 
-<!-- PENGATURAN -->
-<div id="pengaturan" class="card" style="display:none">
-  <h3>Pengaturan</h3>
+<!-- ADMIN -->
+<div id="admin" class="card" style="display:none">
+  <h3>Menu Admin</h3>
+</div>
+
+<!-- KELUAR -->
+<div id="keluar" class="card" style="display:none">
+  <h3>Logout Berhasil</h3>
 </div>
 
 </div>
@@ -183,7 +188,7 @@ iframe {
 google.charts.load('current', {packages:['corechart']});
 
 function showMenu(menu) {
-  const menus = ['dashboard','laporan','rincian','pengaturan'];
+  const menus = ['dashboard','laporan','rincian','admin','keluar'];
 
   menus.forEach(m => {
     const el = document.getElementById(m);
@@ -198,8 +203,8 @@ function showMenu(menu) {
   }
 }
 
-function toggleSubmenu() {
-  const submenu = document.getElementById('submenuPersediaan');
+function toggleSubmenu(id) {
+  const submenu = document.getElementById(id);
   submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
 }
 
@@ -233,13 +238,11 @@ function drawChart() {
 
 google.charts.setOnLoadCallback(drawChart);
 
-/* PREVIEW PDF */
 function previewPDF() {
   document.getElementById('pdfViewer').src =
     "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
 }
 
-/* DOWNLOAD EXCEL */
 function downloadExcel() {
   window.open("https://file-examples.com/wp-content/uploads/2017/02/file_example_XLSX_10.xlsx");
 }
