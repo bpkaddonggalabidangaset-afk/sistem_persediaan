@@ -117,13 +117,16 @@ iframe {
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
 
-    <li onclick="toggleSubmenu()">📦 Persediaan ▾</li>
+    <li onclick="toggleSubmenu()">📦 Persediaan </li>
     <ul id="submenuPersediaan" class="submenu">
       <li onclick="showMenu('laporan')">📄 Laporan</li>
       <li onclick="showMenu('rincian')">📑 Rincian</li>
     </ul>
 
-    <li onclick="showMenu('pengaturan')">⚙️ Pengaturan</li>
+     <li onclick="toggleSubmenu()">⚙️ Pengaturan </li>
+    <ul id="submenuPengaturan" class="submenu">
+      <li onclick="showMenu('Admin')">📄 Admin</li>
+      <li onclick="showMenu('Keluar')">📑 Keluar</li>
   </ul>
 </div>
 
