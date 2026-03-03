@@ -165,11 +165,11 @@ iframe {
 google.charts.load('current', {packages:['corechart']});
 
 /* =========================
-   GANTI FILE ID DI SINI
+   GANTI DENGAN LINK PUBLISH GOOGLE SHEETS ANDA
 ========================= */
 
-const FILE_ID_PDF = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
-const FILE_ID_EXCEL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
+const PDF_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
+const EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
 
 /* ========================= */
 
@@ -224,16 +224,14 @@ function drawChart() {
 
 google.charts.setOnLoadCallback(drawChart);
 
-/* PREVIEW PDF DARI GOOGLE DRIVE */
+/* PREVIEW PDF */
 function previewPDF() {
-  const url = `https://drive.google.com/file/d/${FILE_ID_PDF}/preview`;
-  document.getElementById('pdfViewer').src = url;
+  document.getElementById('pdfViewer').src = PDF_URL;
 }
 
-/* DOWNLOAD EXCEL DARI GOOGLE DRIVE */
+/* DOWNLOAD EXCEL */
 function downloadExcel() {
-  const url = `https://drive.google.com/uc?export=download&id=${FILE_ID_EXCEL}`;
-  window.open(url, '_blank');
+  window.open(EXCEL_URL, '_blank');
 }
 </script>
 
