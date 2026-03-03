@@ -154,16 +154,17 @@ iframe {
 <!-- LAPORAN -->
 <div id="laporan" class="card" style="display:none">
   <h3>Menu Laporan</h3>
-
   <button class="btn" onclick="previewPDF()">📄 Preview PDF</button>
   <button class="btn" onclick="downloadExcel()">📥 Download Excel</button>
-
   <iframe id="pdfViewer"></iframe>
 </div>
 
 <!-- RINCIAN -->
 <div id="rincian" class="card" style="display:none">
   <h3>Menu Rincian</h3>
+
+  <button class="btn" onclick="openDokumen()">📂 Dokumen Pendukung</button>
+  <button class="btn" onclick="downloadKK()">📥 KK Persediaan</button>
 </div>
 
 <!-- ADMIN -->
@@ -186,25 +187,23 @@ google.charts.load('current', {packages:['corechart']});
 ===================== */
 
 const PDF_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=pdf";
-
 const EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
+
+/* GANTI SESUAI KEBUTUHAN */
+const DOKUMEN_DRIVE_URL = "https://drive.google.com/";
+const KK_EXCEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
 
 /* ===================== */
 
 function showMenu(menu) {
   const menus = ['dashboard','laporan','rincian','admin','keluar'];
-
   menus.forEach(m => {
     const el = document.getElementById(m);
     if (el) el.style.display = 'none';
   });
-
   document.getElementById(menu).style.display = 'block';
   document.getElementById('judul').innerText = menu.toUpperCase();
-
-  if(menu === 'dashboard') {
-    setTimeout(drawChart,300);
-  }
+  if(menu === 'dashboard') setTimeout(drawChart,300);
 }
 
 function toggleSubmenu(id) {
@@ -242,19 +241,24 @@ function drawChart() {
 
 google.charts.setOnLoadCallback(drawChart);
 
-/* PDF → PREVIEW SAJA */
+/* PDF PREVIEW */
 function previewPDF() {
   document.getElementById('pdfViewer').src = PDF_URL;
 }
 
-/* EXCEL → LANGSUNG DOWNLOAD */
+/* DOWNLOAD LAPORAN EXCEL */
 function downloadExcel() {
-  const link = document.createElement("a");
-  link.href = EXCEL_URL;
-  link.download = "Laporan_Persediaan.xlsx";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  window.open(EXCEL_URL, '_blank');
+}
+
+/* BUKA GOOGLE DRIVE */
+function openDokumen() {
+  window.open(DOKUMEN_DRIVE_URL, '_blank');
+}
+
+/* DOWNLOAD KK PERSEDIAAN */
+function downloadKK() {
+  window.open(KK_EXCEL_URL, '_blank');
 }
 </script>
 
