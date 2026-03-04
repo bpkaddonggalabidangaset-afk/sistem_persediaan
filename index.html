@@ -8,6 +8,13 @@
 <style>
 body{margin:0;font-family:Arial;background:#f4f6f9}
 
+/* ================= GLOW LOGO ================= */
+@keyframes glow{
+0%{filter:drop-shadow(0 0 5px #3b82f6)}
+50%{filter:drop-shadow(0 0 20px #60a5fa)}
+100%{filter:drop-shadow(0 0 5px #3b82f6)}
+}
+
 /* ================= LOADING ================= */
 #loadingScreen{
 position:fixed;
@@ -42,7 +49,7 @@ animation:spin 1s linear infinite;
 .loading-logo{
 position:absolute;
 width:60px;
-animation:pulse 2s infinite ease-in-out;
+animation:glow 2s infinite ease-in-out;
 }
 
 .loading-text{
@@ -55,12 +62,6 @@ letter-spacing:1px;
 @keyframes spin{
 0%{transform:rotate(0deg)}
 100%{transform:rotate(360deg)}
-}
-
-@keyframes pulse{
-0%{transform:scale(1);opacity:.8}
-50%{transform:scale(1.1);opacity:1}
-100%{transform:scale(1);opacity:.8}
 }
 
 /* ================= LOGIN ================= */
@@ -83,7 +84,11 @@ box-shadow:0 25px 60px rgba(0,0,0,.5);
 color:white;
 }
 
-.login-box img{width:95px;margin-bottom:15px}
+.login-box img{
+width:95px;
+margin-bottom:15px;
+animation:glow 2s infinite ease-in-out;
+}
 
 .login-box input,
 .login-box select{
@@ -117,7 +122,11 @@ font-weight:bold;
 /* SIDEBAR */
 .sidebar{width:230px;height:100vh;background:#1e293b;position:fixed;color:white}
 .logo{text-align:center;padding:18px;border-bottom:1px solid #334155}
-.logo img{width:70px;margin-bottom:10px}
+.logo img{
+width:70px;
+margin-bottom:10px;
+animation:glow 2s infinite ease-in-out;
+}
 .menu{list-style:none;padding:0;margin:0}
 .menu li{padding:14px 20px;cursor:pointer;border-bottom:1px solid #334155}
 .menu li:hover{background:#334155}
@@ -173,7 +182,7 @@ iframe{width:100%;height:600px;margin-top:20px;border:none}
   </div>
 </div>
 
-<!-- ================= MAIN APP ================= -->
+<!-- MAIN APP -->
 <div id="mainApp" style="display:none">
 
 <div class="sidebar">
@@ -184,13 +193,11 @@ iframe{width:100%;height:600px;margin-top:20px;border:none}
 
   <ul class="menu">
     <li onclick="showMenu('dashboard')">🏠 Dashboard</li>
-
     <li onclick="toggleSubmenu('submenuPersediaan')">📦 Persediaan</li>
     <ul id="submenuPersediaan" class="submenu">
       <li onclick="showMenu('laporan')">📄 Laporan</li>
       <li onclick="showMenu('rincian')">📑 Rincian</li>
     </ul>
-
     <li onclick="logout()">🚪 Keluar</li>
   </ul>
 </div>
@@ -235,7 +242,7 @@ iframe{width:100%;height:600px;margin-top:20px;border:none}
 <script>
 google.charts.load('current', {packages:['corechart']});
 
-const PDF_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?Preview=pdf";
+const PDF_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?preview=pdf";
 const EXCEL_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRd1uo4VwtSjcEDuHRQCLD9NmZgVJSCAU3LQ9AV-N3xrH3hc4a2xx5JefXxHVNk-w/pub?output=xlsx";
 const DOKUMEN_DRIVE_URL="https://docs.google.com/spreadsheets/d/1gHthhiqZtJrKMzib4l6CQl_V4E62D42REcjVm_lHX_s/edit?usp=sharing";
 const KK_EXCEL_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vR8Ofz9SCoesDN-CUQrUf1LTWx7mJRzh1QJxy3Pw1MHq33iduZ45iotwxdMbXc-OA/pub?output=xlsx";
